@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
+  <title>Task Scheduler</title>
+  
+</head>
+
+<body>
+    <header>
+         
+        <h1>Task Scheduler</h1>
+      </header>
+
+  <main>
+    <form id="taskForm">
+      <label for="taskInput">New Task:</label>
+      <input type="text" id="taskInput" placeholder="Enter your task" required oninput="showDropdown()">
+      <div class="autocomplete-dropdown" id="autocompleteDropdown">
+         
+      </div>
+      <label for="taskTime">Task Time:</label>
+      <input type="time" id="taskTime" required>
+      <label for="daySelector">Select Day:</label>
+      <select id="daySelector" required>
+        <option value="day1">Day 1</option>
+        <option value="day2">Day 2</option>
+        <option value="day3">Day 3</option>
+        <option value="day4">Day 4</option>
+        <option value="day5">Day 5</option>
+        <option value="day6">Day 6</option>
+        <option value="day7">Day 7</option>
+      </select>
+      <button type="button" onclick="addTask()">Add Task</button>
+    </form>
+
+    <ul id="taskList"></ul>
+  </main>
+
+  <footer>
+    <h3> ❤️Practice the Striver Sheet for at least 10 hours every day, five days a week, for three months.</h3>
+    <h3> ❤️Incorporate weekly practice Computer Networks (CN) and Operating System (DOS) to consistently enhance My skills.</h3>
+  </footer>
+
+  <script>
+    const tasks = ['Striver Sheet Coding  😊', 'Dos Assignment 😊', 'Osw Assignment 😊', 'PIP Assignment 😊', 'Idm Assignment 😊', 'Cn Assignment 😊', 'ITC Assignment 😊', 'Dos Practice 😊', 'Osw Practice 😊', 'PIP Practice 😊', 'Idm Practice 😥', 'Cn Practice 😥', 'ITC Practice 😊','Movie 😊','Meeting 😥','Projects 😊','SQL 😊','Shell Scripting ❗'];
+
+    function showDropdown() {
+      const input = document.getElementById('taskInput');
+      const dropdown = document.getElementById('autocompleteDropdown');
+
+      const searchTerm = input.value.toLowerCase();
+      const matchingTasks = tasks.filter(task => task.toLowerCase().startsWith(searchTerm));
+
+      // Clear previous dropdown options
+      dropdown.innerHTML = '';
+
+      // Add new dropdown options
+      matchingTasks.forEach(match => {
+        const option = document.createElement('a');
+        option.textContent = match;
+        option.onclick = () => {
+          input.value = match;
+          dropdown.style.display = 'none';
+        };
+        dropdown.appendChild(option);
+      });
+
+      // Display the dropdown
+      dropdown.style.display = matchingTasks.length > 0 ? 'block' : 'none';
+    }
+  </script>
+</body>
+
+</html>
